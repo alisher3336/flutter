@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:io';
-import 'main.dart';
 import 'dart:convert';
 import 'summary.dart';
 
