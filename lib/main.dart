@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'dart:io';
 import 'main.dart';
 import 'dart:convert';
+import 'summary.dart';
 
 void main() {
   runApp(const MainApp());
@@ -17,14 +18,28 @@ class MainApp extends StatelessWidget {
       home: Scaffold(
         body: Center(child: Text("loading")),
         appBar: AppBar(
-          title: Align(alignment: Alignment.centerLeft, child: Text("Wikipedia")),
+          title: Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Wikipedia"),
+          ),
         ),
       ),
     );
   }
 }
 
+class ArticleModel {
+  Future<Summary> getRandomPageSummary() async {
+    final uri = Uri.https(
+      "enwikipedia.org",
+      "/api/rest_v1/page/random/summary",
+    );
 
-class ArticleModel{
-  
+    final response = await get(uri);
+
+    if (response.statusCode != 200) {
+      throw const HttpException("Failed to recieve page summary");
+    }
+    return Summary.fromJson(jsonDecode(response.body) as Map<String, Object?>);
+  }
 }
