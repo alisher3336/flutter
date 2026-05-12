@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(child: Text("loading")),
+        body: Center(child: ArticleView()),
         appBar: AppBar(
           title: Align(
             alignment: Alignment.centerLeft,
